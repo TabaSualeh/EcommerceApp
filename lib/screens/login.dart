@@ -5,6 +5,7 @@ import 'package:ecommerce_app/screens/forgotpassowrd.dart';
 import 'package:ecommerce_app/screens/visualsearch.dart';
 import 'package:ecommerce_app/widgets/appbar.dart';
 import 'package:ecommerce_app/widgets/buttons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,80 +32,84 @@ class _LoginState extends State<Login> {
         extendBodyBehindAppBar: true,
         appBar: MyAppbar(bgColor: Colors.transparent)
             .appbarwithback(context, "", false),
-        body: _isLoading
-            ? Center(
-                child: CircularProgressIndicator(
-                color: redIconwithButton,
-              ))
-            : SingleChildScrollView(
-                child: Center(
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 65, left: 20.0),
+                  child: Text(
+                    "Login",
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                      top: 80, left: 24, right: 25, bottom: 38),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 65, left: 20.0),
-                        child: Text(
-                          "Login",
-                          style: Theme.of(context).textTheme.displayLarge,
-                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: showTextField("Email Address", false,
+                            TextInputAction.next, emailController),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                            top: 80, left: 24, right: 25, bottom: 38),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
-                              child: showTextField("Email Address", false,
-                                  TextInputAction.next, emailController),
-                            ),
-                            showTextField("Password", isObsecure,
-                                TextInputAction.done, passController),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 15, bottom: 26),
-                              child: InkWell(
-                                onTap: () {
-                                  toForgotPassword();
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      "Forgot your password?",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .copyWith(color: white6),
-                                    ),
-                                    Icon(
-                                      size: 24,
-                                      Icons.arrow_forward_rounded,
-                                      color: redIconwithButton,
-                                    ),
-                                  ],
-                                ),
+                      showTextField("Password", isObsecure,
+                          TextInputAction.done, passController),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15, bottom: 26),
+                        child: InkWell(
+                          onTap: () {
+                            toForgotPassword();
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Forgot your password?",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(color: white6),
                               ),
-                            ),
-                            CustomButton(
-                              btnName: "LOGIN ",
-                              callback: () {
-                                setState(() {
-                                  _isLoading = true;
-                                });
-                                login(
-                                    emailController.text, passController.text);
-                              },
-                            ),
-                          ],
+                              Icon(
+                                size: 24,
+                                Icons.arrow_forward_rounded,
+                                color: redIconwithButton,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
+                      CustomButton(
+                        btnName: "LOGIN ",
+                        callback: () {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          login(emailController.text, passController.text);
+                        },
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      if (_isLoading == true) ...[
+                        // CircularProgressIndicator(
+                        //   color: redIconwithButton,
+                        // )
+                        CupertinoActivityIndicator(
+                          radius: 22,
+                          color: redIconwithButton,
+                        )
+                      ]
                     ],
                   ),
                 ),
-              ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

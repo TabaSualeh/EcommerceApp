@@ -1,16 +1,18 @@
-# ecommerce_app
+# Ecommerce App
 
-A new Flutter project.
+Developing an Ecommerce App from figma community design. This is our Final project for Mobile App Development - Flutter course approved by Sir Muhammad Salman. Talking about app, integrate REST Api for data, login and signup.
 
-## Getting Started
+Figma Design Link :[ Ecommerce App](https://www.figma.com/file/13WZ43APVUmOas7EUB3VqI/E-commerce-Application---Bano-Qabil?type=design&node-id=28-9&mode=design&t=NArwzd9vmSp0QAme-0) 
 
-This project is a starting point for a Flutter application.
+## Screenshots
 
-A few resources to get you started if this is your first Flutter project:
+This project is underconstruction so few glimpse are here:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="assets/screenshots/1.png" width = 50% height = 50%>
+<img src="assets/screenshots/2.png" width = 50% height = 50%>
+<img src="assets/screenshots/3.png" width = 50% height = 50%>
+<img src="assets/screenshots/4.png" width = 50% height = 50%>
+<img src="assets/screenshots/5.png" width = 50% height = 50%>
+<img src="assets/screenshots/6.png" width = 50% height = 50%>
+<img src="assets/screenshots/7.png" width = 50% height = 50%>
+<img src="assets/screenshots/8.png" width = 50% height = 50%>

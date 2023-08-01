@@ -4,6 +4,7 @@ import 'package:ecommerce_app/constants/colors.dart';
 import 'package:ecommerce_app/screens/login.dart';
 import 'package:ecommerce_app/widgets/appbar.dart';
 import 'package:ecommerce_app/widgets/buttons.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,82 +32,87 @@ class _SignUpState extends State<SignUp> {
         extendBodyBehindAppBar: true,
         appBar: MyAppbar(bgColor: Colors.transparent)
             .appbarwithback(context, "", false),
-        body: _isLoading
-            ? Center(
-                child: CircularProgressIndicator(
-                color: redIconwithButton,
-              ))
-            : SingleChildScrollView(
-                child: Center(
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 65, left: 20.0),
+                  child: Text(
+                    "Sign Up",
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                      top: 80, left: 24, right: 25, bottom: 38),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      showTextField(
+                          "Name", false, TextInputAction.next, nameController),
                       Padding(
-                        padding: const EdgeInsets.only(top: 65, left: 20.0),
-                        child: Text(
-                          "Sign Up",
-                          style: Theme.of(context).textTheme.displayLarge,
-                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: showTextField("Email Address", false,
+                            TextInputAction.next, emailController),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                            top: 80, left: 24, right: 25, bottom: 38),
-                        child: Column(
-                          children: [
-                            showTextField("Name", false, TextInputAction.next,
-                                nameController),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
-                              child: showTextField("Email Address", false,
-                                  TextInputAction.next, emailController),
-                            ),
-                            showTextField("Password", isObsecure,
-                                TextInputAction.done, passController),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 15, bottom: 26),
-                              child: InkWell(
-                                onTap: () {
-                                  toLoginPage(context);
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      "Already have an accoun?",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .copyWith(color: white6),
-                                    ),
-                                    Icon(
-                                      size: 24,
-                                      Icons.arrow_forward_rounded,
-                                      color: redIconwithButton,
-                                    ),
-                                  ],
-                                ),
+                      showTextField("Password", isObsecure,
+                          TextInputAction.done, passController),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15, bottom: 26),
+                        child: InkWell(
+                          onTap: () {
+                            toLoginPage();
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Already have an accoun?",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(color: white6),
                               ),
-                            ),
-                            CustomButton(
-                              btnName: "SIGN UP",
-                              callback: () {
-                                setState(() {
-                                  _isLoading = true;
-                                });
-                                signUp(nameController.text,
-                                    emailController.text, passController.text);
-                              },
-                            ),
-                          ],
+                              Icon(
+                                size: 24,
+                                Icons.arrow_forward_rounded,
+                                color: redIconwithButton,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
+                      CustomButton(
+                        btnName: "SIGN UP",
+                        callback: () {
+                          setState(() {
+                            _isLoading = true;
+                          });
+                          signUp(nameController.text, emailController.text,
+                              passController.text);
+                        },
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      if (_isLoading == true) ...[
+                        // CircularProgressIndicator(
+                        //   color: redIconwithButton,
+                        // )
+                        CupertinoActivityIndicator(
+                          radius: 22,
+                          color: redIconwithButton,
+                        )
+                      ]
                     ],
                   ),
                 ),
-              ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -127,13 +133,14 @@ class _SignUpState extends State<SignUp> {
       passController.clear();
       setState(() {
         _isLoading = false;
+        toLoginPage();
       });
     } else if (response.statusCode == 400) {
       if (name.toString().isEmpty ||
           password.toString().isEmpty ||
           email.toString().isEmpty) {
         Fluttertoast.showToast(
-          msg: 'This field may not be blank',
+          msg: 'All fields are required',
           backgroundColor: white6,
           textColor: Colors.black,
         );
@@ -188,7 +195,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  void toLoginPage(BuildContext context) {
+  void toLoginPage() {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const Login()));
   }

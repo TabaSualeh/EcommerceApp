@@ -17,6 +17,8 @@ class CustomButton extends StatelessWidget {
   final double leftpad;
   final double rightpad;
   final double radius;
+  final double borderRadius;
+  final Color? borderColor;
 
   CustomButton({
     required this.btnName,
@@ -35,6 +37,8 @@ class CustomButton extends StatelessWidget {
     this.leftpad = 0,
     this.rightpad = 0,
     this.toppad = 0,
+    this.borderColor,
+    this.borderRadius = 0,
   });
 
   @override
@@ -57,6 +61,8 @@ class CustomButton extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
+          border: Border.all(
+              color: borderColor ?? Colors.transparent, width: borderRadius),
           borderRadius: radius >= 1
               ? BorderRadius.circular(radius)
               : BorderRadius.circular(25),
