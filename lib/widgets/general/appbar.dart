@@ -10,6 +10,7 @@ class MyAppbar {
       automaticallyImplyLeading: false,
       leading: isHomepage == true
           ? IconButton(
+              color: white6,
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onPressed: () {
@@ -33,6 +34,7 @@ class MyAppbar {
       actions: [
         if (isHomepage == true) ...[
           IconButton(
+            color: white6,
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onPressed: () {
@@ -52,6 +54,35 @@ class MyAppbar {
           ]
         ],
       ),
+    );
+  }
+
+  appbarforSignUp(BuildContext context) {
+    return AppBar(
+      backgroundColor: bgColor ?? Theme.of(context).appBarTheme.backgroundColor,
+      automaticallyImplyLeading: false,
+    );
+  }
+
+  appbarforBottomItems(BuildContext context, String title) {
+    return AppBar(
+      backgroundColor: bgColor ?? Theme.of(context).appBarTheme.backgroundColor,
+      automaticallyImplyLeading: false,
+      title: title.isNotEmpty
+          ? Padding(
+              padding: const EdgeInsets.only(left: 30.0),
+              child: Center(child: Text(title)),
+            )
+          : null,
+      actions: [
+        IconButton(
+          color: white6,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onPressed: () {},
+          icon: const Icon(Icons.search_sharp),
+        ),
+      ],
     );
   }
 }

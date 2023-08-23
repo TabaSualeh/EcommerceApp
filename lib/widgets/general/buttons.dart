@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -76,7 +77,10 @@ class CustomButton extends StatelessWidget {
                     .textTheme
                     .bodySmall!
                     .copyWith(color: fontColor)
-                : Theme.of(context).textTheme.bodySmall,
+                : Theme.of(context)
+                    .textTheme
+                    .bodySmall!
+                    .copyWith(color: white5),
           ),
         ),
       ),
