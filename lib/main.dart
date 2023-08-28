@@ -1,8 +1,11 @@
 import 'package:ecommerce_app/constants/colors.dart';
 import 'package:ecommerce_app/model/categorylist.dart';
 import 'package:ecommerce_app/model/product.dart';
+import 'package:ecommerce_app/screens/checkout.dart';
 import 'package:ecommerce_app/screens/signup.dart';
+import 'package:ecommerce_app/screens/validations/login.dart';
 import 'package:ecommerce_app/screens/validations/signup.dart';
+import 'package:ecommerce_app/widgets/general/bottombar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,9 +16,9 @@ void main() {
 List<Product> favoriteList = [];
 final bagList = [];
 double totalamount = 0;
-String userName="";
-String useremail="";
-String userId="";
+String userName = "";
+String useremail = "";
+String userId = "";
 
 List<Category> categoryList = [];
 Categorylist? categoryItems;
@@ -82,26 +85,34 @@ class MyApp extends StatelessWidget {
                 fontSize: 14, color: greyLightTextField)),
         // Input Decoration Theme
         inputDecorationTheme: InputDecorationTheme(
-          suffixIconColor: greyHintText,
-          fillColor: greyLightTextField,
-          filled: true,
-          labelStyle:
-              GoogleFonts.metrophobic(fontSize: 13, color: greyLabelText),
-          // hintStyle: const TextTheme().labelSmall,
-          border: UnderlineInputBorder(
-            borderRadius: BorderRadius.circular(6.0),
-            borderSide: BorderSide.none,
-          ),
-          focusedBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(4)),
-              borderSide: BorderSide(color: greyLightTextField, width: 0.5)),
-          enabledBorder: UnderlineInputBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(4)),
-              borderSide:
-                  BorderSide(color: greyLightTextField.withOpacity(0.50))),
-        ),
+            suffixIconColor: greyHintText,
+            fillColor: greyLightTextField,
+            filled: true,
+            hintStyle: Theme.of(context).textTheme.bodySmall,
+            labelStyle:
+                GoogleFonts.metrophobic(fontSize: 13, color: greyLabelText),
+            // hintStyle: const TextTheme().labelSmall,
+            border: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(6.0),
+              borderSide: BorderSide.none,
+            ),
+            focusedBorder: UnderlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(4)),
+                borderSide: BorderSide(color: greyLightTextField, width: 0.5)),
+            enabledBorder: UnderlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(4)),
+                borderSide:
+                    BorderSide(color: greyLightTextField.withOpacity(0.50))),
+            errorBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(4)),
+                borderSide: BorderSide(color: errorColor)),
+            focusedErrorBorder: UnderlineInputBorder(
+                borderRadius: const BorderRadius.all(Radius.circular(4)),
+                borderSide: BorderSide(
+                  color: errorColor,
+                ))),
       ),
-      home: const Signuppage(),
+      home: Loginpage(),
     );
   }
 }

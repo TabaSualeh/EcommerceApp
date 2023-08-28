@@ -148,63 +148,62 @@ class _SettingsState extends State<Settings> {
     showModalBottomSheet(
       elevation: 0,
       context: context,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
         top: Radius.circular(34),
       )),
       backgroundColor: greyScaffoldbf,
       isScrollControlled: true,
       builder: (context) {
-        return Container(
-          padding: EdgeInsets.fromLTRB(
-              16, 14, 16, MediaQuery.of(context).viewInsets.bottom),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                  width: 60,
-                  height: 6,
-                  decoration: BoxDecoration(
-                    color: greyLabelText,
-                    borderRadius: BorderRadius.circular(3),
-                  )),
-              Padding(
-                  padding: const EdgeInsets.only(top: 16, bottom: 18),
-                  child: Text(
-                    "Password Change",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(fontSize: 18),
-                  )),
-              _showTextField(context, 'Old Password', false),
-              Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 8),
-                child: Container(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Forgot Password?",
-                        style: Theme.of(context).textTheme.bodySmall,
-                      )),
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+                16, 14, 16, MediaQuery.of(context).viewInsets.bottom),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                    width: 60,
+                    height: 6,
+                    decoration: BoxDecoration(
+                      color: greyLabelText,
+                      borderRadius: BorderRadius.circular(3),
+                    )),
+                Padding(
+                    padding: const EdgeInsets.only(top: 16, bottom: 18),
+                    child: Text(
+                      "Password Change",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(fontSize: 18),
+                    )),
+                _showTextField(context, 'Old Password', false),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Forgot Password?",
+                          style: Theme.of(context).textTheme.bodySmall,
+                        )),
+                  ),
                 ),
-              ),
-              _showTextField(context, "New Password", true),
-              Padding(
-                padding: const EdgeInsets.only(top: 24, bottom: 32),
-                child: _showTextField(context, 'Repeat New Password', true),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 33),
-                child: CustomButton(
+                _showTextField(context, "New Password", true),
+                Padding(
+                  padding: const EdgeInsets.only(top: 24, bottom: 32),
+                  child: _showTextField(context, 'Repeat New Password', true),
+                ),
+                CustomButton(
                   btnName: "SAVE PASSWORD",
                   // leftMargin: 16,
                   // rightMargin: 16,
                   topMargin: 5,
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         );
       },

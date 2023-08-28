@@ -11,3 +11,4 @@ Color greyBottomBar = const Color(0xff1E1F29);
 Color whiteFavorite = const Color(0xffDADADA);
 Color greenprofile = const Color(0xff55D85A);
 Color whiteonly = const Color(0xFFFFFFFF);
+Color errorColor = const Color(0xffFF2424);

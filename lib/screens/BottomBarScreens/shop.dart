@@ -49,12 +49,24 @@ class _ShopPageState extends State<ShopPage> {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
-              child: Text(
-                "Choose Category",
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall!
-                    .copyWith(color: greyLabelText),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Choose Category",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .copyWith(color: greyLabelText),
+                  ),
+                  Text(
+                    "${categoryItems!.categories!.length}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .copyWith(color: greyLabelText),
+                  ),
+                ],
               ),
             ),
             Expanded(

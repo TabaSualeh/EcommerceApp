@@ -116,10 +116,10 @@
 //   }
 
 //   void signUp(String name, String email, String password) async {
-//     http.Response response = await http.post(
-//         Uri.parse("https://ecommerce.salmanbediya.com/users/register"),
-//         body: {'name': name, 'email': email, 'password': password});
-//     var data = jsonDecode(response.body);
+    // http.Response response = await http.post(
+    //     Uri.parse("https://ecommerce.salmanbediya.com/users/register"),
+    //     body: {'name': name, 'email': email, 'password': password});
+    // var data = jsonDecode(response.body);
 
 //     if (response.statusCode == 201) {
 //       Fluttertoast.showToast(

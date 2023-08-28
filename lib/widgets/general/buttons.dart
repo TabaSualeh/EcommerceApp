@@ -20,9 +20,11 @@ class CustomButton extends StatelessWidget {
   final double radius;
   final double borderRadius;
   final Color? borderColor;
+  final AlignmentGeometry? alignment;
 
   CustomButton({
     required this.btnName,
+    this.alignment,
     this.callback,
     this.height = 48.0,
     this.width = 343.0,
@@ -47,6 +49,7 @@ class CustomButton extends StatelessWidget {
     return InkWell(
       onTap: callback,
       child: Container(
+        alignment: alignment != null ? alignment : null,
         padding: EdgeInsets.only(
           left: leftpad,
           right: rightpad,

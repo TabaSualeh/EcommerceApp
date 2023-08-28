@@ -1,5 +1,7 @@
 import 'package:ecommerce_app/constants/colors.dart';
 import 'package:ecommerce_app/main.dart';
+import 'package:ecommerce_app/screens/checkout.dart';
+import 'package:ecommerce_app/screens/success.dart';
 import 'package:ecommerce_app/widgets/bagbar.dart';
 import 'package:ecommerce_app/widgets/general/appbar.dart';
 import 'package:ecommerce_app/widgets/general/buttons.dart';
@@ -79,6 +81,11 @@ class _BagPageState extends State<BagPage> {
                 children: [Text("Total amount : "), Text("$totalamount")],
               ),
               CustomButton(
+                callback: () {
+                  print("pressed");
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Success()));
+                },
                 btnName: "CHECKOUT",
                 leftMargin: 16,
                 rightMargin: 16,

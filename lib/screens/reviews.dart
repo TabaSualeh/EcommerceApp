@@ -7,9 +7,12 @@ import 'package:ecommerce_app/screens/productCard.dart';
 import 'package:ecommerce_app/screens/BottomBarScreens/shop.dart';
 import 'package:ecommerce_app/widgets/category/categoryGrid.dart';
 import 'package:ecommerce_app/widgets/category/productbar.dart';
+import 'package:ecommerce_app/widgets/general/buttons.dart';
+import 'package:ecommerce_app/widgets/general/reviewbottomsheet.dart';
 import 'package:ecommerce_app/widgets/reviewbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import '../widgets/general/appbar.dart';
 
@@ -52,12 +55,35 @@ class _ReviewsandRatingState extends State<ReviewsandRating> {
 
   @override
   Widget build(BuildContext context) {
-    void state() => setState(() {});
+    void state() => setState(() {
+          getratingData(widget.productID);
+        });
     double screeHeight = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: MyAppbar(bgColor: Colors.transparent)
           .appbarwithback(context, "", false),
-
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          await {
+            _showBottomSheet(context, state),
+          };
+        },
+        shape: StadiumBorder(),
+        backgroundColor: redIconwithButton,
+        elevation: 2,
+        label: Text(
+          "Write a review",
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(color: whiteFavorite),
+        ),
+        icon: Icon(
+          Icons.edit_sharp,
+          size: 20,
+          color: whiteonly,
+        ),
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(left: 15.0, right: 20),
@@ -119,70 +145,24 @@ class _ReviewsandRatingState extends State<ReviewsandRating> {
     );
   }
 
-  //  void _showBottomSheet(BuildContext context) {
-  //   showModalBottomSheet(
-  //     elevation: 0,
-  //     context: context,
-  //     shape: const RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.vertical(
-  //       top: Radius.circular(34),
-  //     )),
-  //     backgroundColor: greyScaffoldbf,
-  //     isScrollControlled: true,
-  //     builder: (context) {
-  //       return Container(
-  //         padding: EdgeInsets.fromLTRB(
-  //             16, 14, 16, MediaQuery.of(context).viewInsets.bottom),
-  //         child: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             Container(
-  //                 width: 60,
-  //                 height: 6,
-  //                 decoration: BoxDecoration(
-  //                   color: greyLabelText,
-  //                   borderRadius: BorderRadius.circular(3),
-  //                 )),
-  //             Padding(
-  //                 padding: const EdgeInsets.only(top: 16, bottom: 18),
-  //                 child: Text(
-  //                   "Password Change",
-  //                   style: Theme.of(context)
-  //                       .textTheme
-  //                       .bodyMedium!
-  //                       .copyWith(fontSize: 18),
-  //                 )),
-  //             _showTextField(context, 'Old Password', false),
-  //             Padding(
-  //               padding: const EdgeInsets.only(top: 8, bottom: 8),
-  //               child: Container(
-  //                 alignment: Alignment.centerRight,
-  //                 child: TextButton(
-  //                     onPressed: () {},
-  //                     child: Text(
-  //                       "Forgot Password?",
-  //                       style: Theme.of(context).textTheme.bodySmall,
-  //                     )),
-  //               ),
-  //             ),
-  //             _showTextField(context, "New Password", true),
-  //             Padding(
-  //               padding: const EdgeInsets.only(top: 24, bottom: 32),
-  //               child: _showTextField(context, 'Repeat New Password', true),
-  //             ),
-  //             Padding(
-  //               padding: const EdgeInsets.only(bottom: 33),
-  //               child: CustomButton(
-  //                 btnName: "SAVE PASSWORD",
-  //                 // leftMargin: 16,
-  //                 // rightMargin: 16,
-  //                 topMargin: 5,
-  //               ),
-  //             )
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+  void _showBottomSheet(BuildContext context, VoidCallback state) {
+    showModalBottomSheet(
+      elevation: 2,
+      context: context,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        top: Radius.circular(34),
+      )),
+      backgroundColor: greyScaffoldbf,
+      isScrollControlled: true,
+      builder: (context) {
+        return ReviewBottom(
+          productID: widget.productID,
+          state: () {
+            state();
+          },
+        );
+      },
+    );
+  }
 }
