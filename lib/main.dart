@@ -112,7 +112,7 @@ class MyApp extends StatelessWidget {
                   color: errorColor,
                 ))),
       ),
-      home: Loginpage(),
+      home: Signuppage(),
     );
   }
 }
