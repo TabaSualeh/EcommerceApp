@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/constants/colors.dart';
 import 'package:ecommerce_app/screens/shippingaddress.dart';
-import 'package:ecommerce_app/screens/successpage.dart';
+import 'package:ecommerce_app/screens/success.dart';
 import 'package:ecommerce_app/widgets/general/appbar.dart';
 import 'package:ecommerce_app/widgets/general/buttons.dart';
 import 'package:flutter/material.dart';
@@ -18,131 +18,117 @@ class _CheckOutState extends State<CheckOut> {
     return Scaffold(
       appBar: MyAppbar(bgColor: Colors.transparent)
           .appbarwithback(context, "Checkout", false),
-      body: Padding(
-        padding: const EdgeInsets.only(
-          top: 31,
-          left: 16,
-          right: 16,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Shipping address",
-                style: Theme.of(context).textTheme.bodyMedium),
-            Container(
-              width: double.infinity,
-              height: 108,
-              margin: const EdgeInsets.only(top: 21, bottom: 57),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: white6,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 18, left: 28, right: 23),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Jane Doe",
-                            style: Theme.of(context).textTheme.bodyLarge),
-                        _textButton(
-                            "Change", () => toShippingAddressPage(context)),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 7),
-                      child: Text(
-                        "3 Newbridge Court \nChino Hills, CA 91709, United States",
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(fontSize: 14),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 31, left: 16, right: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Shipping address",
+                  style: Theme.of(context).textTheme.bodyMedium),
+              Container(
+                width: double.infinity,
+                height: 108,
+                margin: const EdgeInsets.only(top: 21, bottom: 57),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: tabtext,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 18, left: 28, right: 23),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Jane Doe",
+                              style: Theme.of(context).textTheme.bodyMedium),
+                          _textButton(
+                              "Change", () => toShippingAddressPage(context)),
+                        ],
                       ),
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 7),
+                        child: Text(
+                          "3 Newbridge Court \nChino Hills, CA 91709, United States",
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 23, bottom: 17),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Payment",
+                        style: Theme.of(context).textTheme.bodyMedium),
+                    _textButton("Change", () => _showBottomSheet(context)),
                   ],
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 23, bottom: 17),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
                 children: [
-                  Text("Payment",
-                      style: Theme.of(context).textTheme.bodyMedium),
-                  _textButton("Change", () => _showBottomSheet(context)),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Container(
-                  width: 64,
-                  height: 38,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8), color: whiteonly),
-                  child: Center(
-                    child: Image.asset(
-                      "name",
+                  Container(
+                    width: 64,
+                    height: 38,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8), color: white),
+                    child: Center(
+                      child: Image.asset(
+                        "assets/paymentcards/mastercard.png",
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 17),
-                Text("**** **** **** 3947",
-                    style: Theme.of(context).textTheme.bodySmall)
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 51, bottom: 21),
-              child: Text("Delivery method",
-                  style: Theme.of(context).textTheme.bodyMedium),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _imageContainer("assets/fedex.png"),
-                _imageContainer("assets/usps.png"),
-                _imageContainer("assets/dhl.png"),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 52, bottom: 14),
-              child: _showText(
-                  "Order:",
-                  "112\$",
-                  Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(color: greyLabelText),
-                  Theme.of(context).textTheme.bodyMedium),
-            ),
-            _showText(
-                "Delivery:",
-                "15\$",
-                Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(color: greyLabelText),
-                Theme.of(context).textTheme.bodyMedium),
-            Padding(
-                padding: const EdgeInsets.only(top: 17, bottom: 26),
+                  const SizedBox(width: 17),
+                  Text("**** **** **** 3947",
+                      style: Theme.of(context).textTheme.bodySmall)
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 51, bottom: 21),
+                child: Text("Delivery method",
+                    style: Theme.of(context).textTheme.bodyMedium),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _imageContainer("fedex"),
+                  _imageContainer("usps"),
+                  _imageContainer("dhl"),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 52, bottom: 14),
                 child: _showText(
-                  "Summary:",
-                  "127\$",
-                  Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(color: greyLabelText),
-                  Theme.of(context).textTheme.bodyMedium,
-                )),
-            const Spacer(),
-            CustomButton(
-                btnName: "SUBMIT ORDER",
-                callback: () => toSuccessPage(context)),
-            const SizedBox(height: 30)
-          ],
+                    "Order:",
+                    "112\$",
+                    Theme.of(context).textTheme.bodySmall,
+                    Theme.of(context).textTheme.bodyMedium),
+              ),
+              _showText(
+                  "Delivery:",
+                  "15\$",
+                  Theme.of(context).textTheme.bodySmall,
+                  Theme.of(context).textTheme.bodyMedium),
+              Padding(
+                  padding: const EdgeInsets.only(top: 17, bottom: 26),
+                  child: _showText(
+                    "Summary:",
+                    "127\$",
+                    Theme.of(context).textTheme.bodySmall,
+                    Theme.of(context).textTheme.bodyMedium,
+                  )),
+              Container(height: 20),
+              CustomButton(
+                  btnName: "SUBMIT ORDER",
+                  callback: () => toSuccessPage(context)),
+              const SizedBox(height: 30)
+            ],
+          ),
         ),
       ),
     );
@@ -163,10 +149,18 @@ class _CheckOutState extends State<CheckOut> {
     return Container(
       width: 100,
       height: 70,
-      decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/usps.png")),
-          borderRadius: BorderRadius.circular(8),
-          color: whiteonly),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(8), color: white),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image.asset("assets/paymentcards/$imgPath.png"),
+          Text("2-3 days",
+              style:
+                  Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 11))
+        ],
+      ),
     );
   }
 
@@ -193,7 +187,7 @@ class _CheckOutState extends State<CheckOut> {
           borderRadius: BorderRadius.vertical(
         top: Radius.circular(34),
       )),
-      backgroundColor: greyScaffoldbf,
+      backgroundColor: bottomSheetBgcolor,
       isScrollControlled: true,
       builder: (context) {
         return Container(
@@ -256,6 +250,25 @@ class _CheckOutState extends State<CheckOut> {
               hintText == "CV" ? TextInputAction.done : TextInputAction.done,
           cursorColor: white5,
           decoration: InputDecoration(
+            suffixIcon: hintText == "Card number"
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: Image.asset(
+                      "assets/paymentcards/mastercard.png",
+                      width: 32,
+                      height: 25,
+                    ),
+                  )
+                : hintText == "CVV"
+                    ? Padding(
+                        padding: const EdgeInsets.only(right: 19),
+                        child: Icon(
+                          Icons.help_outline,
+                          size: 20,
+                          color: greyLabelText,
+                        ),
+                      )
+                    : null,
             labelText: hintText,
           ),
         ),

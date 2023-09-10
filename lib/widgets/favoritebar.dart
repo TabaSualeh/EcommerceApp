@@ -20,6 +20,7 @@ class FavoriteBar extends StatefulWidget {
 class _FavoriteBarState extends State<FavoriteBar> {
   @override
   Widget build(BuildContext context) {
+    double screen = MediaQuery.of(context).size.height;
     double screeHeight = MediaQuery.of(context).size.width;
     return Card(
         color: greyLightTextField,
@@ -103,7 +104,7 @@ class _FavoriteBarState extends State<FavoriteBar> {
                               print(rating);
                             },
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 12,
                           )
                         ],
@@ -114,9 +115,8 @@ class _FavoriteBarState extends State<FavoriteBar> {
               ],
             ),
             Transform.translate(
-                offset: const Offset(251, 98),
+                offset: Offset(screen * 0.41, screeHeight * 0.31),
                 child: AddtocartIconButton(
-                  // favorite: widget.productItem!,
                   cart: widget.productItem!,
                 ))
           ],

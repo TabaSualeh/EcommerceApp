@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/constants/colors.dart';
+import 'package:ecommerce_app/controller/ecommerceController.dart';
 import 'package:ecommerce_app/main.dart';
 import 'package:ecommerce_app/screens/reviews.dart';
 import 'package:ecommerce_app/widgets/general/appbar.dart';
@@ -40,7 +41,6 @@ class _ProductCardState extends State<ProductCard> {
     super.initState();
   }
 
-  // void state() => setState(() {});
   @override
   Widget build(BuildContext context) {
     void newstate() => setState(() {});
@@ -82,8 +82,8 @@ class _ProductCardState extends State<ProductCard> {
                         width: 18,
                       ),
                       FavoriteIconButton(
-                        isFavorite: favoriteList.any(
-                            (element) => element.id == widget.productItem!.id),
+                        isFavorite: EcommerceController()
+                            .isProductFavorite(widget.productItem!),
                         favorite: widget.productItem!,
                         state: () {
                           if (widget.state != null) {
@@ -158,17 +158,7 @@ class _ProductCardState extends State<ProductCard> {
                       topMargin: 8,
                       bottomMargin: 15,
                       callback: () {
-                        bagList.add(widget.productItem);
-                        totalamount = double.parse(widget.productItem!.price!) +
-                            totalamount;
-                        Fluttertoast.showToast(
-                            msg: "Item added in cart",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: greyScaffoldbf.withOpacity(0.8),
-                            textColor: whiteonly,
-                            fontSize: 16.0);
+                        EcommerceController().addToCart(widget.productItem!);
                       },
                     ),
                   ],

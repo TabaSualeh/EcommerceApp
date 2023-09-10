@@ -176,7 +176,7 @@ class _LoginpageState extends State<Loginpage> {
     if (response.statusCode == 200 || response.statusCode == 201) {
       _showToast(data['message']);
       setState(() {
-        if (userdata != null) { 
+        if (userdata != null) {
           userName = userdata.data!.name!;
           useremail = userdata.data!.useremail!;
           userId = userdata.data!.id!;
@@ -184,7 +184,6 @@ class _LoginpageState extends State<Loginpage> {
         }
       });
     } else {
-      print("${emailcontroller.text} ${passwordcontroller.text}");
       _showToast(data['error']);
     }
   }

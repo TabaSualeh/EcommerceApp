@@ -33,9 +33,9 @@ class _VisualSearchState extends State<VisualSearch> {
                   BlendMode.dst,
                 ),
                 image: AssetImage(
-                  'assets/boyImage.png',
+                  'assets/boyImage.jpeg',
                 ),
-                fit: BoxFit.fitWidth)),
+                fit: BoxFit.cover)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -72,8 +72,6 @@ class _VisualSearchState extends State<VisualSearch> {
                 final ImagePicker picker = ImagePicker();
                 XFile? image =
                     await picker.pickImage(source: ImageSource.gallery);
-                print(image?.name);
-                print(image?.path);
                 if (image != null) {
                   setState(() {
                     searchImage = File(image.path);
@@ -107,14 +105,20 @@ class _VisualSearchState extends State<VisualSearch> {
   }
 
   void toHomepageWithBottomBar(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Bottombardown()));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) => Bottombardown()),
+      ModalRoute.withName(''),
+    );
   }
 
   void tovisualsearchfinding(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => VisualFinding(searchImage: searchImage)));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+          builder: (BuildContext context) =>
+              VisualFinding(searchImage: searchImage)),
+      ModalRoute.withName(''),
+    );
   }
 }

@@ -2,7 +2,6 @@ import 'package:ecommerce_app/constants/colors.dart';
 import 'package:ecommerce_app/main.dart';
 import 'package:ecommerce_app/model/product.dart';
 import 'package:ecommerce_app/widgets/general/addtocartbutton.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -18,12 +17,12 @@ class BagBar extends StatefulWidget {
 }
 
 class _BagBarState extends State<BagBar> {
-  int quantity = 1;
+  // int quantity = 1;
   @override
   Widget build(BuildContext context) {
     double productprice = double.parse(widget.productItem!.price!);
-
     double screeHeight = MediaQuery.of(context).size.width;
+    // widget.productItem!.quantity = 1;
     return Card(
         color: greyLightTextField,
         child: Stack(
@@ -63,9 +62,11 @@ class _BagBarState extends State<BagBar> {
                         Row(
                           children: [
                             InkWell(
+                              // Decrease Icon
                               onTap: () {
                                 setState(() {
-                                  quantity--;
+                                  widget.productItem!.quantity--;
+                                  // quantity--;
                                   if (totalamount != 0) {
                                     totalamount = totalamount -
                                         double.parse(
@@ -73,7 +74,7 @@ class _BagBarState extends State<BagBar> {
                                     widget.state();
                                   }
 
-                                  if (quantity == 0) {
+                                  if (widget.productItem!.quantity == 0) {
                                     bagList.remove(widget.productItem);
                                     widget.state();
                                   }
@@ -93,12 +94,13 @@ class _BagBarState extends State<BagBar> {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            Text("$quantity"),
+                            Text("${widget.productItem!.quantity}"),
                             const SizedBox(width: 8),
                             InkWell(
+                              // Increase Icon
                               onTap: () {
                                 setState(() {
-                                  quantity++;
+                                  widget.productItem!.quantity++;
                                   totalamount =
                                       double.parse(widget.productItem!.price!) +
                                           totalamount;
@@ -119,9 +121,10 @@ class _BagBarState extends State<BagBar> {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            if (quantity > 1) ...[
+                            if (widget.productItem!.quantity > 1) ...[
                               Expanded(
-                                child: Text("${quantity * productprice}\$",
+                                child: Text(
+                                    "${widget.productItem!.quantity * productprice}\$",
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium!

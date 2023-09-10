@@ -27,11 +27,11 @@ class _SliderImagesHomeState extends State<SliderImagesHome> {
 
   @override
   void initState() {
-    Timer.periodic(Duration(seconds: 2), (Timer timer) {
+    Timer.periodic(const Duration(seconds: 2), (Timer timer) {
       if (currentIndex < slidingImage.length) {
         currentIndex++;
         Pcontroller.animateToPage(currentIndex,
-            duration: Duration(milliseconds: 350), curve: Curves.easeIn);
+            duration: const Duration(milliseconds: 350), curve: Curves.easeIn);
       } else {
         currentIndex = 0;
       }

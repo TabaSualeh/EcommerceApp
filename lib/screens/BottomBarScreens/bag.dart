@@ -6,6 +6,7 @@ import 'package:ecommerce_app/widgets/bagbar.dart';
 import 'package:ecommerce_app/widgets/general/appbar.dart';
 import 'package:ecommerce_app/widgets/general/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class BagPage extends StatefulWidget {
   const BagPage({Key? key}) : super(key: key);
@@ -36,19 +37,13 @@ class _BagPageState extends State<BagPage> {
               Expanded(
                 child: Container(
                   width: double.infinity,
-                  margin: const EdgeInsets.only(left: 12, right: 12),
+                  // margin: const EdgeInsets.only(left: 12, right: 12),
                   child: bagList.isEmpty
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
-                              Icons.shopping_cart_outlined,
-                              size: 100,
-                              color: redIconwithButton,
-                            ),
-                            const SizedBox(height: 13),
-
-                            // ),
+                            Lottie.asset("animation/ecommerce_Bag.json",
+                                width: double.infinity),
                             Text("No Items in you Bag",
                                 style: Theme.of(context)
                                     .textTheme
@@ -67,6 +62,7 @@ class _BagPageState extends State<BagPage> {
                                 state: state,
                                 productItem: item,
                                 callback: () {
+                                  // item.quantity = 1;
                                   // gotoProductCard(item);
                                 },
                               ),
@@ -78,13 +74,17 @@ class _BagPageState extends State<BagPage> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text("Total amount : "), Text("$totalamount")],
+                children: [
+                  const Text("Total amount : "),
+                  Text("$totalamount\$")
+                ],
               ),
               CustomButton(
                 callback: () {
-                  print("pressed");
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Success()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CheckOut()));
                 },
                 btnName: "CHECKOUT",
                 leftMargin: 16,

@@ -51,12 +51,11 @@ class _SpecificCategoryState extends State<SpecificCategory> {
         MaterialPageRoute(
             builder: (context) => ProductCard(
                   productItem: productItem,
-                )));
+                ))).then((value) => setState(() {}));
   }
 
   @override
   Widget build(BuildContext context) {
-    void state() => setState(() {});
     double screeHeight = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: MyAppbar(bgColor: Colors.transparent)

@@ -4,6 +4,7 @@ import 'package:ecommerce_app/widgets/category/categoryGrid.dart';
 import 'package:ecommerce_app/widgets/favoritebar.dart';
 import 'package:ecommerce_app/widgets/general/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({Key? key}) : super(key: key);
@@ -71,17 +72,18 @@ class _FavoritesPageState extends State<FavoritesPage> {
             Expanded(
               child: Container(
                 width: double.infinity,
-                margin: const EdgeInsets.only(left: 12, right: 12),
+                // margin: const EdgeInsets.only(left: 12, right: 12),
                 child: favoriteList.isEmpty
                     ? Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.bookmarks_outlined,
-                            size: 100,
-                            color: redIconwithButton,
-                          ),
-                          SizedBox(height: 13),
+                          // Icon(
+                          //   Icons.bookmarks_outlined,
+                          //   size: 100,
+                          //   color: redIconwithButton,
+                          // ),
+
+                          Lottie.asset("animation/ecommerce_Favorites.json"),
                           Text("No Favorties !!",
                               style: Theme.of(context)
                                   .textTheme
@@ -94,7 +96,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                 .titleSmall!
                                 .copyWith(color: white5.withOpacity(0.8)),
                             textAlign: TextAlign.center,
-                          )
+                          ),
+                          const Spacer()
                         ],
                       )
                     : ListView.builder(

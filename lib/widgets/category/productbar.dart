@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/constants/colors.dart';
+import 'package:ecommerce_app/controller/ecommerceController.dart';
 import 'package:ecommerce_app/main.dart';
 import 'package:ecommerce_app/model/product.dart';
 import 'package:ecommerce_app/widgets/general/favoriteIconButton.dart';
@@ -16,12 +17,26 @@ class ProductCatBar extends StatefulWidget {
 
 class _ProductCatBarState extends State<ProductCatBar> {
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    setState(() {});
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     void state() {
-      setState(() {});
+      setState(() {
+        EcommerceController().isProductFavorite(widget.productItem!);
+      });
     }
 
-    double screeHeight = MediaQuery.of(context).size.width;
+    double screeHeight = MediaQuery.of(context).size.height;
+    double screewidth = MediaQuery.of(context).size.width;
     return Card(
         color: greyLightTextField,
         child: Stack(
@@ -33,8 +48,8 @@ class _ProductCatBarState extends State<ProductCatBar> {
                 InkWell(
                   onTap: widget.callback,
                   child: Container(
-                    width: screeHeight * 0.32,
-                    height: screeHeight * 0.38,
+                    width: screewidth * 0.32,
+                    height: screeHeight * 0.18,
                     margin: const EdgeInsets.only(right: 11),
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
@@ -96,14 +111,14 @@ class _ProductCatBarState extends State<ProductCatBar> {
               ],
             ),
             Transform.translate(
-                offset: const Offset(251, 98),
+                offset: Offset(screewidth * 0.79, screeHeight * 0.15),
                 child: FavoriteIconButton(
                   state: () {
                     state;
                   },
                   favorite: widget.productItem!,
-                  isFavorite: favoriteList
-                      .any((element) => element.id == widget.productItem!.id),
+                  isFavorite: EcommerceController()
+                      .isProductFavorite(widget.productItem!),
                 ))
           ],
         ));

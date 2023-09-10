@@ -3,6 +3,7 @@ import 'package:ecommerce_app/model/categorylist.dart';
 import 'package:ecommerce_app/model/product.dart';
 import 'package:ecommerce_app/screens/checkout.dart';
 import 'package:ecommerce_app/screens/signup.dart';
+import 'package:ecommerce_app/screens/splashscreen.dart';
 import 'package:ecommerce_app/screens/validations/login.dart';
 import 'package:ecommerce_app/screens/validations/signup.dart';
 import 'package:ecommerce_app/widgets/general/bottombar.dart';
@@ -14,11 +15,14 @@ void main() {
 }
 
 List<Product> favoriteList = [];
-final bagList = [];
+List<Product> bagList = [];
 double totalamount = 0;
 String userName = "";
 String useremail = "";
 String userId = "";
+// List<ProductModal> allpro;
+ProductModal proItems = ProductModal();
+ProductModal saleItems = ProductModal();
 
 List<Category> categoryList = [];
 Categorylist? categoryItems;
@@ -112,7 +116,7 @@ class MyApp extends StatelessWidget {
                   color: errorColor,
                 ))),
       ),
-      home: Signuppage(),
+      home: const SplashScreen(),
     );
   }
 }
