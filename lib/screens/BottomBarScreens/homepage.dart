@@ -7,7 +7,9 @@ import 'package:ecommerce_app/widgets/general/sliderImages.dart';
 import 'package:ecommerce_app/widgets/shimmers/shimmergrid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
+import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -69,82 +71,31 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              SizedBox(
-                  height:
-                      isCheck == true ? screenHeight * 0.2 : screenHeight * 0.8,
-                  child: SliderImagesHome(
-                    isCheck: isCheck,
-                    callback: checkButton,
-                  )),
-              const SizedBox(
-                height: 20,
-              ),
-              if (proItems.products == null) ...[
-                CupertinoActivityIndicator(color: redIconwithButton),
-                GetShimmerLoading().getShimmerGrid(screenHeight)
-              ] else ...[
-                Container(
-                  margin: const EdgeInsets.only(left: 14),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (isCheck == true) ...[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "SALE",
-                              style: Theme.of(context).textTheme.displayLarge,
-                            ),
-                            TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "view all",
-                                  style: Theme.of(context).textTheme.labelSmall,
-                                ))
-                          ],
-                        ),
-                        Text(
-                          "Super summer sale",
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                        SizedBox(
-                          height: screenHeight * 0.40,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: ((context, index) {
-                              final item = saleItems.products![index];
-
-                              return ProductGrid(
-                                isFavorite: favoriteList
-                                    .any((element) => element.id == item.id),
-                                product: item,
-                                callback: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ProductCard(
-                                                productItem: item,
-                                                state: () {
-                                                  newstate();
-                                                },
-                                              )));
-                                },
-                              );
-                            }),
-                            itemCount: saleItems.products!.length,
-                          ),
-                        ),
-                      ],
+          child: Column(children: [
+            SizedBox(
+                height:
+                    isCheck == true ? screenHeight * 0.2 : screenHeight * 0.6,
+                child: SliderImagesHome(
+                  isCheck: isCheck,
+                  callback: checkButton,
+                )),
+            const SizedBox(
+              height: 20,
+            ),
+            if (proItems.products == null) ...[
+              GridShimmer(screenHeight: screenHeight)
+            ] else ...[
+              Container(
+                margin: const EdgeInsets.only(left: 14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (isCheck == true) ...[
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "NEW",
+                            "SALE",
                             style: Theme.of(context).textTheme.displayLarge,
                           ),
                           TextButton(
@@ -156,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Text(
-                        "You’ve never seen it before!",
+                        "Super summer sale",
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       SizedBox(
@@ -166,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                           scrollDirection: Axis.horizontal,
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: ((context, index) {
-                            final item = proItems.products![index];
+                            final item = saleItems.products![index];
 
                             return ProductGrid(
                               isFavorite: favoriteList
@@ -185,15 +136,63 @@ class _HomePageState extends State<HomePage> {
                               },
                             );
                           }),
-                          itemCount: proItems.products!.length,
+                          itemCount: saleItems.products!.length,
                         ),
                       ),
                     ],
-                  ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "NEW",
+                          style: Theme.of(context).textTheme.displayLarge,
+                        ),
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "view all",
+                              style: Theme.of(context).textTheme.labelSmall,
+                            ))
+                      ],
+                    ),
+                    Text(
+                      "You’ve never seen it before!",
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    SizedBox(
+                      height: screenHeight * 0.40,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: ((context, index) {
+                          final item = proItems.products![index];
+
+                          return ProductGrid(
+                            isFavorite: favoriteList
+                                .any((element) => element.id == item.id),
+                            product: item,
+                            callback: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ProductCard(
+                                            productItem: item,
+                                            state: () {
+                                              newstate();
+                                            },
+                                          )));
+                            },
+                          );
+                        }),
+                        itemCount: proItems.products!.length,
+                      ),
+                    ),
+                  ],
                 ),
-              ]
-            ],
-          ),
+              ),
+            ]
+          ]),
         ),
       ),
     );

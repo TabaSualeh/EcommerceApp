@@ -20,7 +20,6 @@ class _ShopPageState extends State<ShopPage> {
         MaterialPageRoute(
             builder: (context) => SpecificCategory(
                   categoryID: categoryId,
-                  categoryItems: categoryItems,
                 )));
   }
 
